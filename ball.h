@@ -5,18 +5,16 @@
 #define MAX(a,b) a > b ? a : b
 #define MIN(a,b) a > b? b : a
 const double g = 10;
-const double eps = 0.01;
+const double eps = 0.00001;
 
 class Ball
 {
 private:
     double speed_x = 0, speed_y = 0;
-    double angle = 0;
     double x0 = 0, y0 = 0;
     double loss = 0;
     double l_border = 0, r_border = 0;
     double x_f = 0, y_f = 0;
-    double time = 0;
     bool borders = false;
 public:
     Ball() = default;
@@ -25,8 +23,8 @@ public:
         speed_y = velocity * sin(alpha);
     }
     Ball(double x1, double y1, double velocity, double alpha) {
-        x0 = x1;
-        y0 = y1;
+        x_f = x0 = x1;
+        y_f = y0 = y1;
         speed_x = velocity * cos(alpha);
         speed_y = velocity * sin(alpha);
     }
@@ -45,13 +43,12 @@ public:
         return sqrt(speed_y * speed_y + speed_x * speed_x);
     }
 
-    void SetCoords(double x1, double y1) {
-        x0 = x1;
-        y0 = y1;
+    double GetSpeedX() {
+        return speed_x;
     }
 
-    double GetAngle() {
-        return angle;
+    double GetSpeedY() {
+        return speed_y;
     }
 
     double GetX0(){

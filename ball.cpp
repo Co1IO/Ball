@@ -1,7 +1,7 @@
 #include "ball.h"
 #include <math.h>
+#include <assert.h>
 #include <iostream>
-
 
 double square_equaation(double a, double b, double c) {    //ax^2 + bx + c = 0
     double D = (b * b - 4 * a * c) / 4;
@@ -13,9 +13,9 @@ double square_equaation(double a, double b, double c) {    //ax^2 + bx + c = 0
 }
 
 void Ball::fly(double t) {
-
+    
     if (abs(t) <= eps) return;
-
+    
     double x, y;
     x = this -> x_f;
     y = this -> y_f;
@@ -24,6 +24,7 @@ void Ball::fly(double t) {
     double t_flyx = 0;
     
     t_flyy = square_equaation( - g / 2, this -> speed_y, y);
+    // std::cout << t_flyy << std::endl;
     if (this -> borders) {
         if (this -> speed_x > 0) {
             t_flyx = (this -> r_border - x) / this -> speed_x;
